@@ -84,3 +84,58 @@
     </div>
 
 
+    <!-- Modal Overlay (เพิ่มส่วนนี้เข้ามา) -->
+    <div id="message-overlay" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 hidden">
+        <!-- Modal Box -->
+        <div class="bg-white rounded-2xl shadow-xl p-8 max-w-sm w-full text-center">
+            <p id="modal-message" class="text-xl text-gray-800 mb-6 font-semibold"></p>
+            <button id="modal-close-button" class="w-full bg-blue-600 text-white py-2 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors duration-300">
+                ปิด
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript (เพิ่มส่วนนี้เข้ามา) -->
+    <script>
+        // เลือก element ที่ต้องใช้
+        const contactBtn = document.getElementById('contact-button');
+        const supportBtn = document.getElementById('support-button');
+        const overlay = document.getElementById('message-overlay');
+        const modalMessage = document.getElementById('modal-message');
+        const closeBtn = document.getElementById('modal-close-button');
+
+        // ฟังก์ชันสำหรับแสดง Modal
+        function showModal(message) {
+            modalMessage.textContent = message;
+            overlay.classList.remove('hidden');
+        }
+
+        // ฟังก์ชันสำหรับซ่อน Modal
+        function hideModal() {
+            overlay.classList.add('hidden');
+        }
+
+        // เมื่อคลิกปุ่ม "ติดต่อทีมงาน"
+        contactBtn.addEventListener('click', () => {
+            showModal('อ่อ ไม่อยากคุยอะ');
+        });
+
+        // เมื่อคลิกปุ่ม "ให้กำลังใจทีมงาน"
+        supportBtn.addEventListener('click', () => {
+            showModal('ขอบใจ');
+        });
+
+        // เมื่อคลิกปุ่ม "ปิด"
+        closeBtn.addEventListener('click', hideModal);
+
+        // เมื่อคลิกที่พื้นหลังสีเทา (overlay)
+        overlay.addEventListener('click', (event) => {
+            // เช็คว่ากดที่พื้นหลังจริงๆ ไม่ใช่ตัวกล่องข้อความ
+            if (event.target === overlay) {
+                hideModal();
+            }
+        });
+    </script>
+</body>
+</html>
+
